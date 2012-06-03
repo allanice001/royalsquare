@@ -52,7 +52,7 @@ div.delclass {
 
 }
 /* menu */
-#menu{ margin:0px; padding:0px; list-style:none; color:#fff; line-height:45px; display:inline-block; float:left; z-index:1000; width: 700px; }
+#menu{ margin:0px; padding:0px; list-style:none; color:#fff; line-height:45px; display:inline-block; float:left; z-index:1000; width: 750px; }
 #menu a { color:#fff; text-decoration:none; }
 #menu > li {background:#172322 none repeat scroll 0 0; cursor:pointer; float:left; position:relative;padding:0px 10px;}
 #menu > li a:hover {color:#B0D730;}

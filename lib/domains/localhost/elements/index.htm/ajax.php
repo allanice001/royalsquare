@@ -45,7 +45,7 @@
         '<tr><td colspan=100%" id="buttontd"><input type="button" onclick="changedistrib(\''. $id .'\', \''. $name .'\', \''. $address .'\')" value="Change Distriburor ..." /></td></tr>'.
         '</table>'.
         '<hr />'.
-        '<div id="toolbardiv" style="width: 650px;">'.
+        '<div id="toolbardiv" style="width: 750px;">'.
         '<ul id="menu">
             <li><span onclick="loadcollections(\''. $id .'\')">Collections</span></li>
             <li><span onclick="loadinvestgate(\''. $id .'\')">Investigations</span></li>
@@ -79,7 +79,7 @@
     }
     
     if ($rand7) {//lookupcollections
-        echo '<p></p>'.
+        echo '<p><hr /></p>'.
         '<p><strong>Historic Data</strong></p>'.
         '<table border="2" cellspacing="5" cellpadding="5" style="margin:auto;">'.
         '<tr><th>Customer Name</th><th>5Kg</th><th>9Kg</th><th>12Kg</th><th>14Kg</th><th>19Kg</th><th>48Kg</th><th>Collected</th><th>Reference</th></tr>';
@@ -109,19 +109,19 @@
     }
     
     if ($rand9) {//loadcollectioncustomers
-        $html = '<tr><td></td><th>5Kg</th><th>9Kg</th><th>12Kg</th><th>14Kg</th><th>19Kg</th><th>48Kg</th><th>Reference</th></tr>';
+        $html = '<tr><td></td><th>5Kg</th><th>9Kg</th><th>12Kg</th><th>14Kg</th><th>19Kg</th><th>48Kg</th><th>Reference</th></tr>';        
         $rs_customers = $DB->query('SELECT * FROM customers');
         while($customers = $rs_customers->next()) {
             $html .=
             '<tr>'.
             '<th>'. $customers['name'] .'</th>'.
-            '<td><input type="text" id="['. $customers['id'] .'][5kg]"  name="['. $customers['id'] .'][5kg]" size="4" /></td>'.
-            '<td><input type="text" id="['. $customers['id'] .'][9kg]"  name="['. $customers['id'] .'][9kg]" size="4" /></td>'.
-            '<td><input type="text" id="['. $customers['id'] .'][12kg]" name="['. $customers['id'] .'][12kg]" size="4" /></td>'.
-            '<td><input type="text" id="['. $customers['id'] .'][14kg]" name="['. $customers['id'] .'][14kg]" size="4" /></td>'.
-            '<td><input type="text" id="['. $customers['id'] .'][19kg]" name="['. $customers['id'] .'][19kg]" size="4" /></td>'.
-            '<td><input type="text" id="['. $customers['id'] .'][48kg]" name="['. $customers['id'] .'][48kg]" size="4" /></td>'.
-            '<td><select name="user_id" >';
+            '<td><input type="text" id="'. $customers['id'] .'_5kg"  name="'. $customers['id'] .'_5kg"  value="0" size="4" /></td>'.
+            '<td><input type="text" id="'. $customers['id'] .'_9kg"  name="'. $customers['id'] .'_9kg"  value="0" size="4" /></td>'.
+            '<td><input type="text" id="'. $customers['id'] .'_12kg" name="'. $customers['id'] .'_12kg" value="0" size="4" /></td>'.
+            '<td><input type="text" id="'. $customers['id'] .'_14kg" name="'. $customers['id'] .'_14kg" value="0" size="4" /></td>'.
+            '<td><input type="text" id="'. $customers['id'] .'_19kg" name="'. $customers['id'] .'_19kg" value="0" size="4" /></td>'.
+            '<td><input type="text" id="'. $customers['id'] .'_48kg" name="'. $customers['id'] .'_48kg" value="0" size="4" /></td>'.
+            '<td><select name="'. $customers['id'] .'_user_id" id="'. $customers['id'] .'_user_id" >';
             $rs_users = $DB->query('SELECT id, username FROM sec_users');
             while($users = $rs_users->next()) {
                 $html .= '<option value="'. $users['id'] .'">'. $users['username'] .'</option>';
@@ -133,6 +133,56 @@
         echo $html;
     }
     
-    if ($rand10) {
-        print_pre($_POST);
+    if ($rand10) {//uploadcollections
+        //print_pre($_POST);
+        $date = get('date');
+        $c1_5kg = get('c1_5kg');
+        $c2_5kg = get('c2_5kg'); 
+        $c3_5kg = get('c3_5kg'); 
+        $c4_5kg = get('c4_5kg'); 
+        $c1_9kg = get('c1_9kg'); 
+        $c2_9kg = get('c2_9kg'); 
+        $c3_9kg = get('c3_9kg'); 
+        $c4_9kg = get('c4_9kg'); 
+        $c1_12kg = get('c1_12kg');
+        $c2_12kg = get('c2_12kg');
+        $c3_12kg = get('c3_12kg');
+        $c4_12kg = get('c4_12kg');
+        $c1_14kg = get('c1_14kg');
+        $c2_14kg = get('c2_14kg');
+        $c3_14kg = get('c3_14kg');
+        $c4_14kg = get('c4_14kg');
+        $c1_19kg = get('c1_19kg');
+        $c2_19kg = get('c2_19kg');
+        $c3_19kg = get('c3_19kg');
+        $c4_19kg = get('c4_19kg');
+        $c1_48kg = get('c1_48kg');
+        $c2_48kg = get('c2_48kg');
+        $c3_48kg = get('c3_48kg');
+        $c4_48kg = get('c4_48kg');
+        $c1_user_id = get('c1_user_id');
+        $c2_user_id = get('c2_user_id');
+        $c3_user_id = get('c3_user_id');
+        $c4_user_id = get('c4_user_id');
+        if ($date) {
+            $date = explode('/',$date);
+            $date = mktime(0,0,0,$date['0'], $date['1'], $date['2']);
+        } else {
+            $date = mktime();
+        }
+        if ($c1_5kg || $c1_9kg || $c1_12kg || $c1_14kg || $c1_19kg || $c1_48kg) {//Afrox
+            $DB->query('INSERT INTO collections (custid, 5kg, 9kg, 12kg, 14kg, 19kg, 48kg,  dts, distid, user_id) VALUES (1, '. $c1_5kg .', '. $c1_9kg .', '. $c1_12kg .', '. $c1_14kg .', '. $c1_19kg .', '. $c1_48kg .', '. $date .', '. $id .', '. $c1_user_id .')');
+        }
+        
+        if ($c2_5kg || $c2_9kg || $c2_12kg || $c2_14kg || $c2_19kg || $c2_48kg) {
+            $DB->query('INSERT INTO collections (custid, 5kg, 9kg, 12kg, 14kg, 19kg, 48kg,  dts, distid, user_id) VALUES (2, '. $c2_5kg .', '. $c2_9kg .', '. $c2_12kg .', '. $c2_14kg .', '. $c2_19kg .', '. $c2_48kg .', '. $date .', '. $id .', '. $c2_user_id .')');
+        }
+        
+        if ($c3_5kg || $c3_9kg || $c3_12kg || $c3_14kg || $c3_19kg || $c3_48kg) {
+            $DB->query('INSERT INTO collections (custid, 5kg, 9kg, 12kg, 14kg, 19kg, 48kg,  dts, distid, user_id) VALUES (3, '. $c3_5kg .', '. $c3_9kg .', '. $c3_12kg .', '. $c3_14kg .', '. $c3_19kg .', '. $c3_48kg .', '. $date .', '. $id .', '. $c3_user_id .')');
+        }
+        
+        if ($c4_5kg || $c4_9kg || $c4_12kg || $c4_14kg || $c4_19kg || $c4_48kg) {
+            $DB->query('INSERT INTO collections (custid, 5kg, 9kg, 12kg, 14kg, 19kg, 48kg,  dts, distid, user_id) VALUES (4, '. $c4_5kg .', '. $c4_9kg .', '. $c4_12kg .', '. $c4_14kg .', '. $c4_19kg .', '. $c4_48kg .', '. $date .', '. $id .', '. $c4_user_id .')');
+        }
     }
