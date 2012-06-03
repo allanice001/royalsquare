@@ -1,0 +1,60 @@
+<?php
+
+	$image_path = imagePath('widgets');
+
+	echo
+		'DIV.Toolbar {padding: 2px;}' .
+		'TABLE.Toolbar {width: 100%; font-size: 11px; cursor: default;}' .
+		'TABLE.Toolbar TD {border: none; padding: 0px; margin: 0px; background: transparent;}' .
+		'.Toolbar INPUT, .Toolbar SELECT {font-size: 11px; margin-bottom: 1px; width: 100px;}' .
+		'.Toolbar .back {background: url(' . $image_path . 'toolbar/body.gif) repeat-x top;}' .
+		'.Toolbar .normal {margin: 1px; height: 20px;}' .
+		'.Toolbar .highlight {background: url(' . $image_path . 'toolbar/highlight.gif) repeat-x top #ffdb75; border: solid 1px #ffbd69; height: 22px;}' .
+		'.Toolbar .clicked {background: url(' . $image_path . 'toolbar/clicked.gif) repeat-x top #ffb85e; border: solid 1px #fb8c3c; height: 22px;}';
+
+	echo
+		'.IconList {margin: 0px 0px 5px 0px; width: 100%; border-top: solid 1px #e0e0e0;}' .
+		'.IconList .header {background: url(' . $image_path . 'iconlist/header.gif) repeat-x bottom #fff; border-bottom: solid 1px #c0c0c0; text-align: center; font-weight: bold; padding: 2px;}' .
+		'.IconList .iconarea {color: #15428b; padding: 9px;}' .
+		'.IconList .iconarea .icon {background: url(' . $image_path . 'iconlist/icon.png) no-repeat left top; cursor: pointer; width: 70px; height: 75px; margin: 0px 6px 6px 0px; float: left; overflow: hidden;}' .
+		'.IconList .iconarea .icon .image {text-align: center; padding: 4px 0px 4px 0px;}' .
+		'.IconList .iconarea .icon .text {padding: 0px 3px; text-align: center; font-size: 11px; line-height: 12px;}';
+
+	echo
+		'.TabStrip {background: url(' . $image_path . 'tabstrip/bg.gif) repeat-x bottom; vertical-align: bottom; padding-top: 5px;}' .
+		'.TabStrip .tab {margin-right: 1px; float: left; cursor: pointer; font-size: small;}' .
+		'.TabStrip .tab DIV {float: left; overflow: hidden;}' .
+		'.TabStrip .tab .disabled {color: #c0c0c0; cursor: default;}' .
+		'.TabStrip .default DIV {background-image: url(' . $image_path . 'tabstrip/default.gif); height: 23px; line-height: 23px;}' .
+		'.TabStrip .default .left,' .
+		'.TabStrip .default .right {width: 7px;}' .
+		'.TabStrip .default .center {padding: 0px 10px;}' .
+		'.TabStrip .out  .default_off .left {background-position: 0px 0px;}' .
+		'.TabStrip .out  .default_off .center {background-position: 0px -23px;}' .
+		'.TabStrip .out  .default_off .right {background-position: -7px 0px;}' .
+		'.TabStrip .out  .default_on  .left {background-position: 0px -46px;}' .
+		'.TabStrip .out  .default_on  .center {background-position: 0px -69px; font-weight: bold;}' .
+		'.TabStrip .out  .default_on  .right {background-position: -7px -46px;}' .
+		'.TabStrip .over .default_off .left {background-position: 0px -92px;}' .
+		'.TabStrip .over .default_off .center {background-position: 0px -115px;}' .
+		'.TabStrip .over .default_off .right {background-position: -7px -92px;}' .
+		'.TabStrip .over .default_on  .left {background-position: 0px -138px;}' .
+		'.TabStrip .over .default_on  .center {background-position: 0px -161px; font-weight: bold;}' .
+		'.TabStrip .over .default_on  .right {background-position: -7px -138px;}' .
+		'.TabStrip .red DIV {background-image: url(' . $image_path . 'tabstrip/red.gif); height: 23px; line-height: 23px;}' .
+		'.TabStrip .red .left,' .
+		'.TabStrip .red .right {width: 7px;}' .
+		'.TabStrip .red .center {padding: 0px 10px;}' .
+		'.TabStrip .out  .red_off .left {background-position: 0px 0px;}' .
+		'.TabStrip .out  .red_off .center {background-position: 0px -23px; color: #ff0000;}' .
+		'.TabStrip .out  .red_off .right {background-position: -7px 0px;}' .
+		'.TabStrip .out  .red_on  .left {background-position: 0px -46px;}' .
+		'.TabStrip .out  .red_on  .center {background-position: 0px -69px; font-weight: bold; color: #ff0000;}' .
+		'.TabStrip .out  .red_on  .right {background-position: -7px -46px;}' .
+		'.TabStrip .over .red_off .left {background-position: 0px -92px;}' .
+		'.TabStrip .over .red_off .center {background-position: 0px -115px; color: #ff0000;}' .
+		'.TabStrip .over .red_off .right {background-position: -7px -92px;}' .
+		'.TabStrip .over .red_on  .left {background-position: 0px -138px;}' .
+		'.TabStrip .over .red_on  .center {background-position: 0px -161px; font-weight: bold; color: #ff0000;}' .
+		'.TabStrip .over .red_on  .right {background-position: -7px -138px;}' .
+		'.TabStripContainer {border-left: solid 1px #d8d2bd; border-right: solid 1px #d8d2bd; border-bottom: solid 1px #d8d2bd; padding: 7px;}';

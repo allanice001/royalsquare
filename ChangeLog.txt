@@ -1,0 +1,125 @@
+xxx xx, xxxx -	2.1.0
+
+	* Removed the $name parameter for the createElement & destroyElement functions in global.js.php
+	* Removed $DB->close function, and fixed function layout for the $DB->whereLike function ({})
+	* Added getArray function for formatted data, extended lookup function to return multiple fields, renamed recordset close() to free()
+	* Remove logs_remote_addr table and detection in config.php
+	* Built in new div based GUI Layout code into outputLayout function, and 5 default layouts
+	* Fixed element indexing in XML class. Root node attributes have been added.
+	* Cleaned gui startup file. CSS and JS includes are now done in the base class. Remove "-" (dash) from title if none is specified in domains.
+	* Enabled automatic CSS compression.
+	* Added the ability to communicate directly to an element ajax file eg. http://localhost/request/example.htm
+	* Add urlRequest function to base class file
+	* Updated the Structure class using internal PHP functionality, updated javascript version
+	* Added explodeQuote function in the base class to break up strings but retain delimiters in quotes
+	* Added GUI element aliases for the urlRequest function
+	* Changed "images" to "assets" in the GUI configuration table and updates imagePath function
+	* Updated all default Javascript methods with the $ function and broke up the code into modules
+	* Implemented element includes, with wildcards
+	* Fixed the $Private global variable
+
+Feb 01, 2010 -	2.0.9
+
+	* Added cancelBubble and cancelDefault functions to the passed event in the Events class
+	* Added element manipulation functions in the global scripts file
+	* Added imagegradientfillrect and imagequadgradientfillrect functions into the Image class file
+	* Added mathematical functions into the Image class file
+	* Replaced the Image class with the imagescaleresize function
+	* Added XML Document class
+	* Added highlight function in base class file
+	* Added imagedrawshape function in the Image class file for drawing triangles, squares, circles, stars etc
+
+Sep 29, 2009 -	2.0.8
+
+	* Added pack and unpack functions, removed set and get from Structures class
+	* Added a 3 region layout in the default configuration
+	* Removed documentShutdown execution at the end of the framework
+	* Updated the global.js.php functions with all the lastest versions
+	* Modified the outputLayout function creating the tabled layout with dynamic class names, changed the global stylesheet accordingly
+	* outputLayout produces an individual table per row enabling better styling and layouts
+	* Element classes, styles and scripts are now detected from local and global domains
+	* External stylesheets and script files are included into the body of their associated documents
+	* Moved all images & fonts to an external "assets" folder
+	* The "lib" folder is secured with an .htaccess file and all others were removed
+	* imagePath and image functions were modified to use the "assets" folder
+	* Added an Image class for manipulating images
+	* Removed the ROOT check from config.php and moved the dependencies after the configuration queries
+	* Added a layout_id on the gui_layouts table for layout recycling with different styles
+	* Added a {style}-Region# class to the layout columns, and an example in the common stylesheet
+
+Aug 24, 2009 -	2.0.7
+
+	* Fixed Events class in global javascript
+	* Added Structure class to global javascript
+	* Added print_r function to global javascript
+	* Renamed convert_to_string and convert_from_string function to correct naming standards in Structure class
+	* Changed Sessions data type from BLOB to TEXT
+	* Removed element file columns from the gui_elements table
+	* Added element file detection in the outputLayout function in Base class
+	* Corrected page parameter extraction when using a regular expression in Base class
+	* Added convertToCode function to Structure class for converting structures back to PHP usable script
+	* Changed referencing method while converting structures to arrays in Structures class and changed is_double function to is_float
+	* Put Page Alias value in the System['page'] array
+	* Elements are detected from local or global domain
+	* Script constants were added to the base class
+
+Aug 31, 2008 -	2.0.6
+
+	* Added "view" region 0 in the outputLayout function in the base class
+	* Pages will now be detected via regular expressions in the database by adding a regexp column in the gui_pages table
+	* Renamed search function to "whereLike" in db.php
+	* Added "whereIn" function in db.php
+	* Copied the .htaccess file to prevent remote listing into the classes and framework directories
+	* Added check to prevent direct access into the config.php file
+	* Removed directory and php extension check in .htaccess
+	* Renamed configuration, and configuration_groups to gui_configuration in the database
+	* Changed config.php to read from new gui_configuration tables
+	* Removed ending ?> tags from all php documents to prevent white spaces
+	* Renamed all "code.php" files to "view.php" files
+	* Added a javascript shutdown procedure in gui_includes, and added a common.js.php file to global and local domains
+	* Created a $private variable to keep data within a single elements scope, used to protect shared data in an element
+	* Updated framework files
+	* Updated root files
+	* Added AJAX request function and Events class to global javascript
+	* Added Structure class
+	* Added domain_id and layout_id fields in gui table for domain layout based element placing
+	* Added check for $_SERVER['HTTP_USER_AGENT'] and $_SERVER['HTTP_ACCEPT'] in config.php file
+	* Added a print_pre() function in class base.php under string functions
+
+May 18, 2008 -	2.0.5
+
+	* .htaccess file was not redirecting properly for an alias domain
+	* Added expiry parameters in .htaccess for caching images
+	* Added common styles to allow functionality similar to the transitional doc type
+	* Added log tables with security access features
+	* Changed outputLayout function to properly define required elements
+	* Added an "application" configuration group and created a "version" config value
+	* Created a "example.htm" element to demonstrate element structure
+	* Added a search function in db.php to create WHERE statements
+	* Added mail class
+
+Jan 26, 2008 -	2.0.4
+
+	* Updated the database class to handle paging with a union query
+
+Jan 20, 2008 -	2.0.3
+
+	* Added get() in base.php under system functions
+	* Added redirect() in base.php under url functions
+
+Jan 15, 2008 -	2.0.2
+
+	* Added urlPath() in base.php under url functions
+	* Added the ChangeLog.txt
+	* Filters out pages without an Alias from $System
+
+Dec 25, 2007 -	2.0.1
+
+	* Corrected the lookup function in the database class to call the new internal query command.
+
+Dec 16, 2007 -	2.0.0 First Release
+
+	* Added support for multiple domains
+	* Implemented .htaccess mod-rewrite for automatic page redirections
+	* Formatted all classes to the PEAR naming standard.
+	* Added an init option for all page elements.
