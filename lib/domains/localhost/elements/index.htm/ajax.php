@@ -112,7 +112,7 @@
             $date = mktime();
         }
     
-        echo ('INSERT INTO collectionnotes (dist_id, task, dts, note) VALUES ('. $id .', '. ($task ? $date : '0') .', '. $date .', "'. $collectionnotes .'")');
+        $DB->query('INSERT INTO collectionnotes (dist_id, task, dts, note) VALUES ('. $id .', '. ($task ? $date : '0') .', '. $date .', "'. $collectionnotes .'")');
     }
     
     if ($rand9) {//loadcollectioncustomers
