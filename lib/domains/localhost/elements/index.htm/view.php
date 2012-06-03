@@ -6,23 +6,21 @@
 dump = function(arr,level) {
 	var dumped_text = "";
 	if(!level) level = 0;
-	
-	//The padding given at the beginning of the line.
 	var level_padding = "";
 	for(var j=0;j<level+1;j++) level_padding += "    ";
 	
-	if(typeof(arr) == 'object') { //Array/Hashes/Objects 
+	if(typeof(arr) == 'object') { 
 		for(var item in arr) {
 			var value = arr[item];
 			
-			if(typeof(value) == 'object') { //If it is an array,
+			if(typeof(value) == 'object') {
 				dumped_text += level_padding + "'" + item + "' ...\n";
 				dumped_text += dump(value,level+1);
 			} else {
 				dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
 			}
 		}
-	} else { //Stings/Chars/Numbers etc.
+	} else {
 		dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
 	}
 	return dumped_text;
@@ -125,7 +123,7 @@ loadlegal = function(id) {
 
 loadinvestgate = function(id) {
     $('#loadreturn').html('INVESTIGATE: ' +id);
-};
+}; 
 
 loadcollections = function(id) {
     lookupcollections(id);
@@ -138,12 +136,24 @@ loadcollections = function(id) {
     '<table id="loadcollectioncustomers" border="1" cellpadding="5" cellspacing="5">' +
     '</table>' +
     '</form>' +
-    '<input type="button" value="Add Collections" onclick="uploadcollections(\''+ id +'\');" />';
+    '<input type="button" value="Add Collections" onclick="uploadcollections(\''+ id +'\');" />' +
+    '<hr /><div id="collectionnotes">'+
+    '<form id="loadcollectionnotes">'+
+    '<p>Task:<input type="checkbox" id="task" name="task" value="1" /></p>' +
+    '<p>Date:<input type="text" id="date1" name="date1" id="date" /></p>' +
+    '<p>Notes:<textarea id="collectionnotestext" rows="10" cols="90"></textarea></p>'+
+    '</form>'+
+    '<input type="button" value="Upload Notes" onclick="uploadcollectionnotes(\''+ id + '\');" />'+
+    '</div>';
     
     $('#loadreturn').html(data);
 
     $(function(){
         $('#date').live('click', function() {
+            $(this).datepicker({showOn:'focus'}).focus();
+        });
+        
+        $('#date1').live('click', function() {
             $(this).datepicker({showOn:'focus'}).focus();
         });
     });
@@ -198,6 +208,12 @@ lookupcollections = function(id) {
     $.post("<? echo urlRequest();?>",{id:id, rand7:Math.random() }, function(data)
     {
         $('#lookupcollecionsreturn').html(data);
+    });
+};
+
+uploadcollectionnotes = function(id) {
+    $.post("<? echo urlRequest();?>",{id:id, date: $('#date1').val(), task: $('#task').attr('checked') , collectionnotes: $('#collectionnotestext').val() , rand8:Math.random() }, function(data) {
+        alert(data);
     });
 };
 

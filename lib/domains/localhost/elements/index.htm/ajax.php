@@ -101,11 +101,18 @@
         '<input type="button" onclick="" value="Add Collections Data"';
     }
     
-    if ($rand8) {//loadusers
-        $rs_users = $DB->query('SELECT id, username FROM sec_users');
-        while($users = $rs_users->next()) {
-            echo '<option value="'. $users['id'] .'">'. $users['username'] .'</option>';
+    if ($rand8) {//uploadcollectionnotes
+        $date = get('date');
+        $task = get('task');
+        $collectionnotes = get('collectionnotes');
+        if ($date) {
+            $date = explode('/',$date);
+            $date = mktime(0,0,0,$date['0'], $date['1'], $date['2']);
+        } else {
+            $date = mktime();
         }
+    
+        echo ('INSERT INTO collectionnotes (dist_id, task, dts, note) VALUES ('. $id .', '. ($task ? $date : '0') .', '. $date .', "'. $collectionnotes .'")');
     }
     
     if ($rand9) {//loadcollectioncustomers
