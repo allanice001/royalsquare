@@ -118,7 +118,22 @@ clientbar = function() {
 }
 
 loadlegal = function(id) {
-    $('#loadreturn').html('LEGAL: ' +id);
+    lookuplegal(id);
+    data = '<div id="lookuplegalreturn"></div>';
+    $('#loadreturn').html(data);
+    
+};
+
+lookuplegal = function(id) {
+    $.post("<? echo urlRequest();?>",{id: id, legrand1:Math.random() }, function(data) {
+        $('#lookuplegalreturn').html(data);    
+    });
+};
+
+loadlegalnote = function(id) {
+    $.post("<? echo urlRequest();?>",{id: id, legrand2:Math.random() }, function(data) {
+        $('#lookuplegalreturn').html(data);    
+    });
 };
 
 loadinvestgate = function(id) {

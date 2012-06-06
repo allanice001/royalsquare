@@ -83,8 +83,14 @@ div.delclass {
     width: 750px;
 }     	
 
+#lookuplegalreturn {
+    width: 750px;
+}     	
 
-
+#toolbardiv {
+    width: 750px;
+    height: 50px;
+}
 
 /* From Datepicker*/
 /*!

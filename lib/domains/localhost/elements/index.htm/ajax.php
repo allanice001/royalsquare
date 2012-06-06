@@ -11,6 +11,11 @@
     $rand8 = get('rand8');
     $rand9 = get('rand9');
     $rand10 = get('rand10');
+    
+    $legrand1 = get('legrand1');
+    $legrand2 = get('legrand2');
+    $legrand3 = get('legrand3');
+    
     $q = get('q');
     $id = get('id', 0);
     
@@ -45,7 +50,7 @@
         '<tr><td colspan=100%" id="buttontd"><input type="button" onclick="changedistrib(\''. $id .'\', \''. $name .'\', \''. $address .'\')" value="Change Distriburor ..." /></td></tr>'.
         '</table>'.
         '<hr />'.
-        '<div id="toolbardiv" style="width: 750px;">'.
+        '<div id="toolbardiv">'.
         '<ul id="menu">
             <li><span onclick="loadcollections(\''. $id .'\')">Collections</span></li>
             <li><span onclick="loadinvestgate(\''. $id .'\')">Investigations</span></li>
@@ -192,4 +197,43 @@
         if ($c4_5kg || $c4_9kg || $c4_12kg || $c4_14kg || $c4_19kg || $c4_48kg) {
             $DB->query('INSERT INTO collections (custid, 5kg, 9kg, 12kg, 14kg, 19kg, 48kg,  dts, distid, user_id) VALUES (4, '. $c4_5kg .', '. $c4_9kg .', '. $c4_12kg .', '. $c4_14kg .', '. $c4_19kg .', '. $c4_48kg .', '. $date .', '. $id .', '. $c4_user_id .')');
         }
+    }
+    
+    if ($legrand1) {//lookuplegal
+        //print_pre($_POST);
+        $html = '<table border="1" cellpadding="5" cellspacing="5" style="margin:auto;">'.
+        '<tr><th>Customer</th><th>Attached File</th><th>Date</th></tr>';
+        $rs_notes = $DB->query('SELECT * FROM legalnotes WHERE dist_id='.$id);
+        while ($notes = $rs_notes->next()) {
+            $html .= '<tr>'.
+            '<td onclick="loadlegalnote('. $notes['id'] .')">'. $DB->lookup('SELECT name FROM customers WHERE id='. $notes['cust_id']) .'</td>'.
+            '<td>'. ($notes['file_id']? $DB->lookup('SELECT uploadname FROM legalfiles where id='. $notes['file_id']) : 'No') .'</td>'.
+            '<td>'. date('d M Y', $notes['dts']) .'</td>'.
+            '</tr>';
+        }
+        $html .= '</table>';
+        echo $html;
+        
+    }
+    
+    if ($legrand2) {//loadlegalnote
+        $html = '<table border="1" cellpadding="5" cellspacing="5" style="margin:auto;">';
+        $rs_notes = $DB->query('SELECT * FROM legalnotes WHERE id='.$id);
+        while ($notes = $rs_notes->next()) {
+            $html .= '<tr><th>Customer: </th><td><select id="cust_id">';
+            $rs_customers = $DB->query('SELECT * FROM customers');
+            while ($customers = $rs_customers->next()) {
+                $html .= '<option value="'. $customers['id'] .'" '. ($customers['id'] == $notes['cust_id'] ? ' selected="selected"' : '') .' >'. $customers['name'] .'</option>';
+            }
+            $html .= '</select></td></tr>'.
+                '<tr><th>Notes: </th><td><textarea id="notes" name="notes" rows="10" cols="60">'. $notes['notes'] .'</textarea></td></tr>';
+        }
+        $html .= '<tr><th>File: </th><td><input type="file" id="file" name="file"</td></tr>'.
+        '</table>'.
+        '<input type="button" value="Update Note" onclick="uploadlegal('. $notes['id'] .')" />';
+        echo $html;
+    }
+    
+    if ($legrandrand3) {//uploadlegal
+        
     }
