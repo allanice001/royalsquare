@@ -43,8 +43,8 @@ function locationlogin() {
 <h1>Royal Square Login</h1>
 <div id="msgbox"></div>
 <form method="post" action="" id="login_form">
-<input name="username" type="text" id="username" value="" maxlength="20" /><br /><br />
-<input name="password" type="password" id="password" value="" maxlength="20" /><br /><br />
+<input name="username" type="text" id="username" value="" maxlength="30" /><br /><br />
+<input name="password" type="password" id="password" value="" maxlength="30" /><br /><br />
 <input name="Submit" type="submit" id="submit" value="Login" />
 </form >
 <div id="message"></div>
